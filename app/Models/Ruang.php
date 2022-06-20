@@ -10,11 +10,11 @@ class Ruang extends Model
     use HasFactory;
 
     protected $fillable = [
+        'foto',
         'nama_ruang',
-        'keterangan',
+        'lantai',
+        'deskripsi',
         'kapasitas',
         'status',
     ];
-    
-
 }

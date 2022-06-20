@@ -27,6 +27,7 @@ class RuangController extends Controller
     public function create()
     {
         //
+
     }
 
     /**
@@ -37,8 +38,17 @@ class RuangController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //tambah data ruang
+        $request->validate([
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
 
+        $imageName = time() . '.' . $request->foto->getClientOriginalExtension();
+        $request->foto->move(public_path('images'), $imageName);
+
+
+        Ruang::create($request->all());
+        return redirect('/ruangdetail');
     }
 
     /**

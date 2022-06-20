@@ -16,7 +16,7 @@
                     </div>
 
                     <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="floatingInput" name="email" placeholder="Email"
+                        <input type="text" class="form-control" id="floatingInput" name="email" placeholder="Email"
                             value="{{ $user->email }}">
                         <label for="floatingInput">Email</label>
                     </div>

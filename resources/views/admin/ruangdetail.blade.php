@@ -72,10 +72,16 @@
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" name="kapasitas" placeholder="NIP">
+                            <input type="text" class="form-control" id="floatingInput" name="kapasitas"
+                                placeholder="Kapasitas">
                             <label for="floatingInput">Kapasitas</label>
                         </div>
 
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingInput" name="deskripsi"
+                                placeholder="deskripsi">
+                            <label for="floatingInput">Deskripsi</label>
+                        </div>
                         <div class="row mb-3">
                             <div class="col">
                                 <div class="form-floating mb-3">
@@ -87,7 +93,7 @@
                                         <option value="3">3</option>
                                         <option value="4">4</option>
                                     </select>
-                                    <label for="floatingSelectGrid">Status</label>
+                                    <label for="floatingSelectGrid">Lantai</label>
                                 </div>
 
                             </div>
