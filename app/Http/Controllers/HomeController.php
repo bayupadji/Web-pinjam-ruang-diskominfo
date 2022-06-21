@@ -25,11 +25,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // if (Auth::user()->is_admin == 1 || Auth::user()->is_admin == NULL) {
-        //     // ruangan details
-        //     $ruang = DB::table('ruangs')->get();
-        //     return view('/home', ['ruang' => $ruang]);
-        // }
         $ruang = DB::table('ruangs')->get();
         return view('/home', ['ruang' => $ruang]);
     }

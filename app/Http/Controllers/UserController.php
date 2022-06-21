@@ -86,18 +86,8 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        // $request->validate([
-        //     'name' => 'required',
-        //     'email' => 'required',
-        //     'nip' => 'required',
-        //     'status' => 'required',
-        //     'bidang' => 'required',
-        // ]);
 
         User::find($id)->update($request->all());
-        // return response()->json(['success' => 'Data Berhasil Diubah']);
-
         return redirect()->route('userdetail')->with('success', 'Data berhasil diubah');
     }
 
