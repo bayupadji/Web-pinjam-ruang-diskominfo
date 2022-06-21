@@ -1,7 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RuangController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TransaksiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,15 +24,22 @@ use App\Http\Controllers\RuangController;
 
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'count'])->name('dashboard');
-Route::get('/userdetail', [App\Http\Controllers\UserController::class, 'show'])->name('userdetail');
-Route::get('/userdetail/{user}/destroy', [App\Http\Controllers\UserController::class, 'destroy']);
-Route::get('/ruangdetail', [App\Http\Controllers\RuangController::class, 'show'])->name('ruangdetail');
-Route::get('/ruangdetail/{ruang}/destroy', [App\Http\Controllers\RuangController::class, 'destroy']);
-Route::get('/transaksi', [App\Http\Controllers\TransaksiController::class, 'show'])->name('transaksi');
-Route::get('/transaksi/{transaksi}/destroy', [App\Http\Controllers\TransaksiController::class, 'destroy']);
-Route::get('/edituser/{user}/edit', [App\Http\Controllers\UserController::class, 'edit']);
-Route::post('/edituser/{user}/update', [App\Http\Controllers\UserController::class, 'update']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/dashboard', [DashboardController::class, 'count'])->name('dashboard');
 
+// transaksi
+Route::get('/transaksi', [TransaksiController::class, 'show'])->name('transaksi');
+Route::get('/transaksi/{transaksi}/destroy', [TransaksiController::class, 'destroy']);
+
+// user
+Route::get('/userdetail', [UserController::class, 'show'])->name('userdetail');
+Route::get('/userdetail/{user}/destroy', [UserController::class, 'destroy']);
+Route::get('/edituser/{user}/edit', [UserController::class, 'edit']);
+Route::post('/edituser/{user}/update', [UserController::class, 'update']);
+
+// ruang
+Route::get('/ruangdetail', [RuangController::class, 'show'])->name('ruangdetail');
+Route::get('/ruangdetail/{ruang}/destroy', [RuangController::class, 'destroy']);
 Route::post('/ruangdetail/store', [RuangController::class, 'store']);
+Route::get('/editruang/{ruang}/edit', [RuangController::class, 'edit']);
+Route::post('/editruang/{ruang}/update', [RuangController::class, 'update']);

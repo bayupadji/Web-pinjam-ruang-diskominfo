@@ -78,7 +78,7 @@ class RuangController extends Controller
     public function edit(Ruang $ruang)
     {
         //
-        return view('admin.ruangdetail', ['ruang' => $ruang]);
+        return view('admin.editruang', ['ruang' => $ruang]);
     }
 
     /**

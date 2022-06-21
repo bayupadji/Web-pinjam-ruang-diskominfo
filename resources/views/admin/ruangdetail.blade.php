@@ -35,7 +35,8 @@
                                         <td>{{ $ruang->deskripsi }}</td>
                                         <td>{{ $ruang->status }}</td>
                                         <td>
-                                            <a href="" class="btn btn-warning"><i class="bx bx-edit"></i></a>
+                                            <a href="/editruang/{{ $ruang->id }}/edit" class="btn btn-warning"><i
+                                                    class="bx bx-edit"></i></a>
                                             <a href="/ruangdetail/{{ $ruang->id }}/destroy" class="btn btn-danger"><i
                                                     class="bx bx-trash"></i></a>
                                         </td>
