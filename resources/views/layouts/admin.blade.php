@@ -159,10 +159,6 @@
             @endif
         });
     </script>
-
-
-
-
 </body>
 
 </html>
