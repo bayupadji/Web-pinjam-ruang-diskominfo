@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RuangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +30,5 @@ Route::get('/transaksi', [App\Http\Controllers\TransaksiController::class, 'show
 Route::get('/transaksi/{transaksi}/destroy', [App\Http\Controllers\TransaksiController::class, 'destroy']);
 Route::get('/edituser/{user}/edit', [App\Http\Controllers\UserController::class, 'edit']);
 Route::post('/edituser/{user}/update', [App\Http\Controllers\UserController::class, 'update']);
+
+Route::post('/ruangdetail/store', [RuangController::class, 'store']);

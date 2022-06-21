@@ -40,15 +40,21 @@ class RuangController extends Controller
     {
         //tambah data ruang
         $request->validate([
-            'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'foto' => 'file',
         ]);
 
-        $imageName = time() . '.' . $request->foto->getClientOriginalExtension();
-        $request->foto->move(public_path('images'), $imageName);
+        $filefoto = $request->file('foto')->store('public/images');
+        $namefoto = explode('/', $filefoto);
 
-
-        Ruang::create($request->all());
-        return redirect('/ruangdetail');
+        Ruang::create([
+            'foto' => $namefoto[2],
+            'nama_ruang' => $request->nama_ruang,
+            'lantai' => $request->lantai,
+            'deskripsi' => $request->deskripsi,
+            'kapasitas' => $request->kapasitas,
+            'status' => $request->status,
+        ]);
+        return redirect()->route('ruangdetail')->with('success', 'Ruang berhasil ditambahkan');
     }
 
     /**
@@ -86,7 +92,24 @@ class RuangController extends Controller
     public function update(Request $request, $id)
     {
         //
-        User::find($id)->update($request->all());
+        // User::find($id)->update($request->all());
+
+        // return redirect()->route('ruangdetail')->with('success', 'data berhasil diubah');
+        $request->validate([
+            'foto' => 'file',
+        ]);
+
+        $filefoto = $request->file('foto')->store('public/images');
+        $namefoto = explode('/', $filefoto);
+
+        Ruang::find($id)->update([
+            'foto' => $namefoto[2],
+            'nama_ruang' => $request->nama_ruang,
+            'lantai' => $request->lantai,
+            'deskripsi' => $request->deskripsi,
+            'kapasitas' => $request->kapasitas,
+            'status' => $request->status,
+        ]);
 
         return redirect()->route('ruangdetail')->with('success', 'data berhasil diubah');
     }

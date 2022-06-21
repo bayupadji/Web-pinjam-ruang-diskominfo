@@ -27,14 +27,15 @@
                                 @foreach ($ruang as $ruang)
                                     <tr>
                                         <td>{{ $ruang->id }}</td>
-                                        <td>{{ $ruang->foto }}</td>
+                                        <td><img width="200px" src="{{ asset('storage/images/' . $ruang->foto) }}"
+                                                alt="{{ $ruang->foto }}"></td>
                                         <td>{{ $ruang->nama_ruang }}</td>
                                         <td>{{ $ruang->lantai }}</td>
                                         <td>{{ $ruang->kapasitas }}</td>
                                         <td>{{ $ruang->deskripsi }}</td>
                                         <td>{{ $ruang->status }}</td>
                                         <td>
-                                            <a href="" class="btn btn-warning"><i class="bx bx-edit"></i> Edit</a>
+                                            <a href="" class="btn btn-warning"><i class="bx bx-edit"></i></a>
                                             <a href="/ruangdetail/{{ $ruang->id }}/destroy" class="btn btn-danger"><i
                                                     class="bx bx-trash"></i></a>
                                         </td>
@@ -44,10 +45,8 @@
                         </table>
                     </div>
                 </div>
-
             </div>
         </div>
-
     </div>
 
     <!-- Modal -->
@@ -58,11 +57,11 @@
                     <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                @csrf
                 <div class="modal-body">
-                    <form action="" method="POST" name="frm_tmbh">
+                    <form action="/ruangdetail/store" method="POST" name="frm_tmbh" enctype="multipart/form-data">
+                        @csrf
                         <div class="mb-3">
-                            <input class="form-control" type="file" id="formFile" name="foto">
+                            <input class="form-control" type="file" id="formFile" name="foto" accept="img/*">
                         </div>
 
                         <div class="form-floating mb-3">
@@ -109,11 +108,12 @@
                                 </div>
                             </div>
                         </div>
-                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-danger">Simpan</button>
                 </div>
+                </form>
+
             </div>
         </div>
 
