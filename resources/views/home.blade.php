@@ -6,7 +6,7 @@
     <div class="container-sm">
         <div class="row my-3 gap-2">
             <div class="col justify-content-center ">
-                <a class="btn btn-4 d-grid" href="#"> <i class='bx bxs-door-open bx-lg'></i>Ruang</a>
+                <a class="btn btn-4 d-grid" href="{{ route('ruang') }}"> <i class='bx bxs-door-open bx-lg'></i>Ruang</a>
             </div>
             <div class="col d-grid">
                 <!-- Button trigger modal -->
@@ -109,14 +109,22 @@
                         </select>
                         <label for="floatingSelect">Pilih Ruang</label>
                     </div>
-                    <div class="form-floating mb-3">
-                        <input type="time" class="form-control" id="floatingInput">
-                        <label for="floatingInput">Pilih Tanggal</label>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-floating mb-3">
+                                <input type="time" class="form-control" id="floatingInput">
+                                <label for="floatingInput">Pilih Jam Dimulai</label>
+                            </div>
+
+                        </div>
+                        <div class="col">
+                            <div class="form-floating mb-3">
+                                <input type="time" class="form-control" id="floatingInput">
+                                <label for="floatingInput">Pilih Jam Berakhir</label>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-floating mb-3">
-                        <input type="time" class="form-control" id="floatingInput">
-                        <label for="floatingInput">Pilih Tanggal</label>
-                    </div>
+
                     <div class="form-floating">
                         <textarea class="form-control" placeholder="Tulis keterangan disini" id="floatingTextarea2" style="height: 100px"></textarea>
                         <label for="floatingTextarea2">Keterangan</label>

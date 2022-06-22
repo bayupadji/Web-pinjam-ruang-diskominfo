@@ -65,7 +65,7 @@ class RuangController extends Controller
     {
         //menampilkan data
         $ruang = Ruang::all();
-        return view('admin.ruangdetail', ['ruang' => $ruang]);
+        return view('admin.ruangdetail', ['ruang' => $ruang],);
     }
 
     /**

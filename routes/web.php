@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RuangController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\RuanghomeController;
 use App\Http\Controllers\TransaksiController;
 
 /*
@@ -39,6 +40,7 @@ Route::get('/edituser/{user}/edit', [UserController::class, 'edit']);
 Route::post('/edituser/{user}/update', [UserController::class, 'update']);
 
 // ruang
+Route::get('/ruang', [RuanghomeController::class, 'show'])->name('ruang');
 Route::get('/ruangdetail', [RuangController::class, 'show'])->name('ruangdetail');
 Route::get('/ruangdetail/{ruang}/destroy', [RuangController::class, 'destroy']);
 Route::post('/ruangdetail/store', [RuangController::class, 'store']);

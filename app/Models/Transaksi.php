@@ -29,19 +29,4 @@ class Transaksi extends Model
     {
         return $this->belongsTo(User::class);
     }
-
-    public function getTanggalPinjamAttribute($value)
-    {
-        return date('d-m-Y', strtotime($value));
-    }
-
-    public function getJamPinjamAttribute($value)
-    {
-        return date('H:i', strtotime($value));
-    }
-
-    public function getJamBerakhirAttribute($value)
-    {
-        return date('H:i', strtotime($value));
-    }
 }
