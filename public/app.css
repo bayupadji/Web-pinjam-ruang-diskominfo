@@ -119,6 +119,10 @@
 .card {
     border: none !important;
 }
+
+.modal {
+    border: none !important;
+}
 /* admin */
 /* sidebar */
 /* Google Fonts Import Link */

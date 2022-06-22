@@ -67,7 +67,7 @@
                             </div>
 
                             <div class="form-floating mb-3">
-                                <input type="email" class="form-control @error('email') is-invalid @enderror"
+                                <input type="text" class="form-control @error('email') is-invalid @enderror"
                                     id="floatingInput" name="email" placeholder="Email" value="{{ old('email') }}"
                                     required autocomplete="email" autofocus>
                                 <label for="floatingInput">Email address</label>

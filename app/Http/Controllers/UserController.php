@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -59,7 +58,7 @@ class UserController extends Controller
     public function show()
     {
         //menampilkan data
-        $user = DB::table('users')->get();
+        $user = User::all();
         return view('admin.userdetails', ['user' => $user]);
     }
 
@@ -73,7 +72,6 @@ class UserController extends Controller
     public function edit(User $user)
     {
         //
-        // $user = User::find($id);
         return view('admin.edituser', ['user' => $user]);
     }
 
@@ -86,7 +84,6 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         User::find($id)->update($request->all());
         return redirect()->route('userdetail')->with('success', 'Data berhasil diubah');
     }
@@ -100,7 +97,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         //menghapus data
-        DB::table('users')->where('id', $user->id)->delete();
+        User::find($user->id)->delete();
         return back()->with('success', 'Data berhasil dihapus');
     }
 }

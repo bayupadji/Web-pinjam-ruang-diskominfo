@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ruang;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Models\Transaksi;
 
 class HomeController extends Controller
 {
@@ -25,8 +28,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $ruang = DB::table('ruangs')->get();
-        return view('/home', ['ruang' => $ruang]);
+        $ruang = Ruang::all();
+        $transaksi = count(Transaksi::all());
+        return view('/home', ['ruang' => $ruang], ['counttran' => $transaksi]);
     }
 
     public function adminHome()

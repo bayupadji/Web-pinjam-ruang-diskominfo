@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class TransaksiController extends Controller
 {
@@ -48,7 +47,7 @@ class TransaksiController extends Controller
     public function show()
     {
         //menampilkan data
-        $transaksi = DB::table('transaksis')->get();
+        $transaksi = Transaksi::all();
         return view('admin.transaksi', ['transaksi' => $transaksi]);
     }
 
@@ -84,7 +83,7 @@ class TransaksiController extends Controller
     public function destroy(Transaksi $transaksi)
     {
         //menghapus data by id
-        DB::table('transaksis')->where('id', $transaksi->id)->delete();
+        Transaksi::find($transaksi->id)->delete();
         return back()->with('success', 'Data berhasil dihapus');
     }
 }

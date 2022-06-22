@@ -21,6 +21,10 @@
     <!-- Styles -->
     <link href="app.css" rel="stylesheet">
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+
 
     <title>@yield('title')</title>
 
@@ -48,6 +52,9 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">{{ __('Ruang') }}</a>
+                        </li>
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
@@ -90,6 +97,9 @@
 
     {{-- js bootstrap --}}
     <script src="js/bootstrap.bundle.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
     {{-- js time --}}
     <script type="text/javascript">
@@ -145,6 +155,21 @@
         document.getElementById('date').innerHTML = thisDay + ', ' + day + ' ' + months[month] + ' ' + year;
         //
         -->
+    </script>
+
+    <!-- dataTables -->
+    <script>
+        $(document).ready(function() {
+            $('#tables-home').DataTable({
+                responsive: true,
+                select: true,
+            });
+            $('#tables-1').DataTable({
+                responsive: true,
+                select: true,
+                searching: false,
+            });
+        });
     </script>
 </body>
 

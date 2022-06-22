@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Ruang;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class RuangController extends Controller
 {
@@ -65,7 +64,7 @@ class RuangController extends Controller
     public function show()
     {
         //menampilkan data
-        $ruang = DB::table('ruangs')->get();
+        $ruang = Ruang::all();
         return view('admin.ruangdetail', ['ruang' => $ruang]);
     }
 
@@ -122,7 +121,7 @@ class RuangController extends Controller
     public function destroy(Ruang $ruang)
     {
         //
-        DB::table('ruangs')->where('id', $ruang->id)->delete();
+        Ruang::find($ruang->id)->delete();
         return back()->with('success', 'Data berhasil dihapus');
     }
 }
