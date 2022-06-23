@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Transaksi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TransaksiController extends Controller
 {
@@ -36,6 +37,14 @@ class TransaksiController extends Controller
     public function store(Request $request)
     {
         //
+        if (Auth::check()) {
+            $user = Auth::user();
+            $user_id = $user->id;
+
+            return redirect('/home')->with('success', 'Transaksi berhasil');
+        } else {
+            return redirect('/login')->with('error', 'Silahkan login terlebih dahulu');
+        }
     }
 
     /**
