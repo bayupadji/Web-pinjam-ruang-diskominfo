@@ -33,6 +33,10 @@ class HomeController extends Controller
         return view('/home', ['ruang' => $ruang], ['counttran' => $transaksi]);
     }
 
+    public function store()
+    {
+    }
+
     public function adminHome()
     {
         return view('/dashboard');

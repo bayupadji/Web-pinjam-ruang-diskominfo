@@ -41,9 +41,6 @@
     color: #fff !important;
     border-radius: 20px !important;
     background-size: 100% 100%;
-    -webkit-animation: Gradient 15s ease infinite;
-    -moz-animation: Gradient 15s ease infinite;
-    animation: Gradient 15s ease infinite;
     transition: all 0.5s ease;
     border: none !important;
     box-shadow: 0px 71px 150px rgba(56, 1, 1, 0.07),
@@ -59,47 +56,8 @@
     animation-name: move;
     background: linear-gradient(-45deg, #b73782, #d7a36b);
     background-size: 100% 100%;
-    -webkit-animation: Gradient 15s ease infinite;
-    -moz-animation: Gradient 15s ease infinite;
-    animation: Gradient 15s ease infinite;
     border-radius: 20px;
     border: none !important;
-}
-
-@-webkit-keyframes Gradient {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-@-moz-keyframes Gradient {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-@keyframes Gradient {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
 }
 
 .form-control {
@@ -118,11 +76,19 @@
 
 .card {
     border: none !important;
+    box-shadow: 0px 71px 150px rgba(56, 1, 1, 0.07),
+        0px 29.6621px 62.6664px rgba(56, 1, 1, 0.0503198),
+        0px 15.8588px 33.5045px rgba(56, 1, 1, 0.0417275),
+        0px 8.8903px 18.7823px rgba(56, 1, 1, 0.035),
+        0px 4.72157px 9.97515px rgba(56, 1, 1, 0.0282725),
+        0px 1.96475px 4.15088px rgba(56, 1, 1, 0.0196802) !important;
+    border-radius: 15px;
 }
 
 .modal {
     border: none !important;
 }
+
 /* admin */
 /* sidebar */
 /* Google Fonts Import Link */

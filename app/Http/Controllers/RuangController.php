@@ -90,9 +90,6 @@ class RuangController extends Controller
     public function update(Request $request, $id)
     {
         //
-        // User::find($id)->update($request->all());
-
-        // return redirect()->route('ruangdetail')->with('success', 'data berhasil diubah');
         $request->validate([
             'foto' => 'file',
         ]);
