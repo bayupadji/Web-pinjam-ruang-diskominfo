@@ -15,7 +15,9 @@ class DashboardController extends Controller
         $usercount = count(User::all()); //count user db
         $transaksicount = count($transaksi); //count transaksi db
         $ruangcount = count(Ruang::all()); //count ruang db
+        $userid = User::all();
+        $ruang = Ruang::all();
 
-        return view('admin.dashboard', ['ucount' => $usercount, 'ruangcount' => $ruangcount, 'transaksicount' => $transaksicount, 'transaksi' => $transaksi]);
+        return view('admin.dashboard', ['ucount' => $usercount, 'ruangcount' => $ruangcount, 'transaksicount' => $transaksicount, 'transaksi' => $transaksi], ['ruang' => $ruang], ['uid' => $userid]);
     }
 }

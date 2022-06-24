@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Transaksi;
+use App\Models\Ruang;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,14 +39,6 @@ class TransaksiController extends Controller
     public function store(Request $request)
     {
         //
-        if (Auth::check()) {
-            $user = Auth::user();
-            $user_id = $user->id;
-
-            return redirect('/home')->with('success', 'Transaksi berhasil');
-        } else {
-            return redirect('/login')->with('error', 'Silahkan login terlebih dahulu');
-        }
     }
 
     /**
@@ -56,8 +50,10 @@ class TransaksiController extends Controller
     public function show()
     {
         //menampilkan data
+        $userid = User::all();
+        $ruang = Ruang::all();
         $transaksi = Transaksi::all();
-        return view('admin.transaksi', ['transaksi' => $transaksi]);
+        return view('admin.transaksi', ['transaksi' => $transaksi], ['ruang' => $ruang], ['uid' => $userid]);
     }
 
     /**

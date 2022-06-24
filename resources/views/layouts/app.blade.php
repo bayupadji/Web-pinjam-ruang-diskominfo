@@ -156,20 +156,7 @@
         -->
     </script>
 
-    <!-- dataTables -->
-    <script>
-        $(document).ready(function() {
-            $('#tables-home').DataTable({
-                responsive: true,
-                select: true,
-            });
-            $('#tables-1').DataTable({
-                responsive: true,
-                select: true,
-                searching: false,
-            });
-        });
-    </script>
+    @stack('script')
 </body>
 
 </html>

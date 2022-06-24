@@ -26,6 +26,7 @@ use App\Http\Controllers\TransaksiController;
 Auth::routes();
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::post('/home/store', [HomeController::class, 'store']);
 Route::get('/dashboard', [DashboardController::class, 'count'])->name('dashboard');
 
 // transaksi

@@ -36,6 +36,22 @@
     border: none !important;
 }
 
+.btn-2 {
+    background-color: #068100 !important;
+    border-radius: 10px !important;
+    color: #fff !important;
+    font-weight: 600 !important;
+    padding: 10px 40px !important;
+    margin-left: 10px;
+    border: none !important;
+}
+
+.btn-2:hover {
+    background-color: #055600 !important;
+    color: #fff !important;
+    border: none !important;
+}
+
 .btn-4 {
     background: linear-gradient(-45deg, #d13a6f, #eebd89);
     color: #fff !important;

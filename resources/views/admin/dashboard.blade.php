@@ -46,8 +46,8 @@
 
                 <table class="table table-responsive table-striped table-hover" id="tables">
                     <thead>
-                        <th scope="col">Id Ruang</th>
-                        <th scope="col">Id user</th>
+                        <th scope="col">Nama</th>
+                        <th scope="col">Nama ruang</th>
                         <th scope="col">Keterangan</th>
                         <th scope="col">Tanggal pinjam</th>
                         <th scope="col">Jam Pinjam</th>
@@ -56,13 +56,21 @@
                     </thead>
                     <tbody>
                         @foreach ($transaksi as $tc)
-                            <td>{{ $tc->ruang_id }}</td>
-                            <td>{{ $tc->user_id }}</td>
+                            @if ($tc->user_id != null)
+                                <td>{{ $tc->user->name }}</td>
+                            @endif
+                            @foreach ($ruang as $r)
+                                <td value="{{ $r->id }}">{{ $r->nama_ruang }}</td>
+                            @endforeach
                             <td>{{ $tc->keterangan }}</td>
                             <td>{{ $tc->tanggal_pinjam }}</td>
                             <td>{{ $tc->jam_pinjam }}</td>
                             <td>{{ $tc->jam_berakhir }}</td>
-                            <td>{{ $tc->status }}</td>
+                            @if ($tc->status == 'Belum terverifikasi')
+                                <td><span class="badge text-bg-danger">{{ $tc->status }}</span></td>
+                            @else
+                                <td><span class="badge text-bg-success">{{ $tc->status }}</span></td>
+                            @endif
                         @endforeach
                     </tbody>
                 </table>

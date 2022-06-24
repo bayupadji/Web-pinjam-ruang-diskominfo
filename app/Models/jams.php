@@ -5,10 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Ruang extends Model
+class jams extends Model
 {
     use HasFactory;
-
-    protected $table = 'ruangs';
     protected $guarded = ['id'];
 }

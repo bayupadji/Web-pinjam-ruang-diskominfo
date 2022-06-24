@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ruang;
+use App\Models\jams;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 use App\Models\Transaksi;
+use App\Models\Ruang;
+use DateTime;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -29,12 +29,72 @@ class HomeController extends Controller
     public function index()
     {
         $ruang = Ruang::all();
-        $transaksi = count(Transaksi::all());
-        return view('/home', ['ruang' => $ruang], ['counttran' => $transaksi]);
+
+        // dd($ruang);
+        $ctransaksi = count(Transaksi::all());
+        $datatrans = Transaksi::where('tanggal_pinjam', date('Y-m-d'))->get();
+        $oprasional = jams::where('id', '1')->first();
+
+        $available = [];
+
+        $jam = new DateTime($oprasional->jam_awal);
+        $transit = '';
+        $jamakhir = new DateTime($oprasional->jam_akhir);
+        $loop = true;
+        // $available += [$jam->format('h:i:s') => true];
+        // dd($available);
+        while ($loop) {
+            $listime = array($jam->format('H:i'), true);
+            array_push($available, $listime);
+            // $available += [$jam->format('H:i:s') => true];
+            date_add($jam, date_interval_create_from_date_string('1 hours'));
+            $transit = $jam->format('H:i:s');
+            if ($jam->format('H:i:s') == $jamakhir->format('H:i:s')) {
+                // $available += [$jam->format('H:i:s') => true];
+                $loop = false;
+            }
+            $jam = new DateTime($transit);
+        }
+        // dd(count($available));
+        return view('home', ['ruang' => $ruang, 'counttran' => $ctransaksi, 'available' => $available]);
     }
 
     public function store()
     {
+        // simpan data
+        if (Auth::check()) {
+            $user = Auth::user();
+
+            $transaksi = new Transaksi;
+            $transaksi->user_id = $user->id;
+            $transaksi->ruang_id = request('ruang_id');
+            $transaksi->tanggal_pinjam = request('tanggal_pinjam');
+            $transaksi->jam_pinjam = request('jam_pinjam');
+            $transaksi->jam_berakhir = request('jam_berakhir');
+            $transaksi->keterangan = request('keterangan');
+            $transaksi->status = 'Belum terverifikasi';
+            $transaksi->save();
+
+            // dd($transaksi);
+
+            return redirect('/')->with('success', 'Transaksi berhasil, silahkan tunggu verifikasi dari admin');
+        } else {
+            return redirect('/')->with('error', 'Silahkan login terlebih dahulu');
+        }
+
+
+
+        // Transaksi::create([
+        //     'user_id' => request(Auth::check()->id),
+        //     'ruang_id' => request('ruang_id'),
+        //     'tanggal_pinjam' => request('tanggal_pinjam'),
+        //     'jam_pinjam' => request('jam_pinjam'),
+        //     'jam_berakhir' => request('jam_berakhir'),
+        //     'keterangan' => request('keterangan'),
+        //     'status' => 'Belum terverifikasi',
+        // ]);
+
+        // return redirect()->route('home')->with('success', 'Transaksi berhasil, silahkan tunggu verifikasi dari admin');
     }
 
     public function adminHome()
