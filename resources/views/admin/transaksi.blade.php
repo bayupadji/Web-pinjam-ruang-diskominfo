@@ -12,12 +12,12 @@
                             <thead>
                                 <th scope="col">No.</th>
                                 <th scope="col">id</th>
-                                <th scope="col">Id Ruang</th>
-                                <th scope="col">Id user</th>
-                                <th scope="col">Keterangan</th>
+                                <th scope="col">Nama user</th>
+                                <th scope="col">Nama Ruang</th>
                                 <th scope="col">Tanggal pinjam</th>
                                 <th scope="col">Jam Pinjam</th>
                                 <th scope="col">Jam Berakhir</th>
+                                <th scope="col">Keterangan</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Aksi</th>
                             </thead>
@@ -25,17 +25,27 @@
                                 @foreach ($transaksi as $transaksi)
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $transaksi->id }}</td>
-                                    <td>{{ $transaksi->ruang_id }}</td>
-                                    <td>{{ $transaksi->user_id }}</td>
-                                    <td>{{ $transaksi->keterangan }}</td>
+                                    @if ($transaksi->user_id != null)
+                                        <td>{{ $transaksi->user->name }}</td>
+                                    @endif
+                                    @foreach ($ruang as $r)
+                                        <td value="{{ $r->id }}">{{ $r->nama_ruang }}</td>
+                                    @endforeach
                                     <td>{{ $transaksi->tanggal_pinjam }}</td>
                                     <td>{{ $transaksi->jam_pinjam }}</td>
                                     <td>{{ $transaksi->jam_berakhir }}</td>
-                                    <td>{{ $transaksi->status }}</td>
+                                    <td>{{ $transaksi->keterangan }}</td>
+                                    @if ($transaksi->status == 'Belum terverifikasi')
+                                        <td><span class="badge text-bg-danger">{{ $transaksi->status }}</span></td>
+                                    @else
+                                        <td><span class="badge text-bg-success">{{ $transaksi->status }}</span></td>
+                                    @endif
                                     <td>
-                                        <a href="" class="btn btn-warning"><i class="bx bx-edit"></i></a>
-                                        <a href="/transaksi/{{ $transaksi->id }}/destroy" class="btn btn-danger"><i
-                                                class="bx bx-trash"></i></a>
+                                        <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModal">
+                                            Verifikasi
+                                        </button>
+
                                     </td>
                                 @endforeach
                             </tbody>
@@ -45,4 +55,29 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post">
+                        @csrf
+                        <p>Apakah data ingin diverifikasi?</p>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-1" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-2">Ya</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 @endsection
