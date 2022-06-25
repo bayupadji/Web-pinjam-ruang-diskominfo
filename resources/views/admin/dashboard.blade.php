@@ -54,13 +54,14 @@
                         <th scope="col">Jam Berakhir</th>
                         <th scope="col">Status</th>
                     </thead>
-                    <tbody>
-                        @foreach ($transaksi as $tc)
+                    @foreach ($transaksi as $tc)
+                        <tbody>
+
                             @if ($tc->user_id != null)
                                 <td>{{ $tc->user->name }}</td>
                             @endif
                             @foreach ($ruang as $r)
-                                <td value="{{ $r->id }}">{{ $r->nama_ruang }}</td>
+                                <td>{{ $r->nama_ruang }}</td>
                             @endforeach
                             <td>{{ $tc->keterangan }}</td>
                             <td>{{ $tc->tanggal_pinjam }}</td>
@@ -71,8 +72,8 @@
                             @else
                                 <td><span class="badge text-bg-success">{{ $tc->status }}</span></td>
                             @endif
-                        @endforeach
-                    </tbody>
+                        </tbody>
+                    @endforeach
                 </table>
 
             </div>

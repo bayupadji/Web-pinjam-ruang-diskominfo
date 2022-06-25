@@ -21,15 +21,15 @@
                                 <th scope="col">Status</th>
                                 <th scope="col">Aksi</th>
                             </thead>
-                            <tbody>
-                                @foreach ($transaksi as $transaksi)
+                            @foreach ($transaksi as $transaksi)
+                                <tbody>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $transaksi->id }}</td>
                                     @if ($transaksi->user_id != null)
                                         <td>{{ $transaksi->user->name }}</td>
                                     @endif
                                     @foreach ($ruang as $r)
-                                        <td value="{{ $r->id }}">{{ $r->nama_ruang }}</td>
+                                        <td>{{ $r->nama_ruang }}</td>
                                     @endforeach
                                     <td>{{ $transaksi->tanggal_pinjam }}</td>
                                     <td>{{ $transaksi->jam_pinjam }}</td>
@@ -45,10 +45,9 @@
                                             data-bs-target="#exampleModal">
                                             Verifikasi
                                         </button>
-
                                     </td>
-                                @endforeach
-                            </tbody>
+                                </tbody>
+                            @endforeach
                         </table>
                     </div>
                 </div>

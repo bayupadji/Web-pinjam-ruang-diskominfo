@@ -69,8 +69,8 @@
                         <th scope="col">Kapasitas</th>
                         <th scope="col">Status</th>
                     </thead>
+                    {{-- @foreach ($ruang as $ruang)
                     <tbody>
-                        {{-- @foreach ($ruang as $ruang)
                             @if ($ruang->status == 'tersedia')
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
@@ -80,8 +80,8 @@
                                     <td>{{ $ruang->status }}</td>
                                 </tr>
                             @endif
+                        </tbody>
                         @endforeach --}}
-                    </tbody>
                 </table>
             </div>
         </div>
