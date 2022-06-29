@@ -63,25 +63,30 @@
                 <table id="tables-home">
                     <thead>
                         <th scope="col">No.</th>
-                        <th scope="col">Foto</th>
                         <th scope="col">Nama Ruang</th>
-                        <th scope="col">Lantai</th>
-                        <th scope="col">Kapasitas</th>
+                        <th scope="col">Tanggal pinjam</th>
+                        <th scope="col">Jam pinjam</th>
+                        <th scope="col">Jam Selesai</th>
                         <th scope="col">Status</th>
                     </thead>
-                    {{-- @foreach ($ruang as $ruang)
-                    <tbody>
-                            @if ($ruang->status == 'tersedia')
-                                <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $ruang->nama_ruang }}</td>
-                                    <td>{{ $ruang->lantai }}</td>
-                                    <td>{{ $ruang->kapasitas }}</td>
-                                    <td>{{ $ruang->status }}</td>
-                                </tr>
-                            @endif
+                    @foreach ($transaksi as $ts)
+                        <tbody>
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                @foreach ($ruang as $r)
+                                    <td>{{ $r->nama_ruang }}</td>
+                                @endforeach
+                                <td>{{ $ts->tanggal_pinjam }}</td>
+                                <td>{{ $ts->jam_pinjam }}</td>
+                                <td>{{ $ts->jam_berakhir }}</td>
+                                @if ($ts->status == 'Belum terverifikasi')
+                                    <td><span class="badge text-bg-danger">{{ $ts->status }}</span></td>
+                                @else
+                                    <td><span class="badge text-bg-success">{{ $ts->status }}</span></td>
+                                @endif
+                            </tr>
                         </tbody>
-                        @endforeach --}}
+                    @endforeach
                 </table>
             </div>
         </div>

@@ -39,6 +39,7 @@ class TransaksiController extends Controller
     public function store(Request $request)
     {
         //
+
     }
 
     /**
@@ -64,7 +65,6 @@ class TransaksiController extends Controller
      */
     public function edit($id)
     {
-        //
     }
 
     /**
@@ -77,6 +77,13 @@ class TransaksiController extends Controller
     public function update(Request $request, $id)
     {
         //
+
+        $request->validate([
+            'status' => 'required',
+        ]);
+
+        Transaksi::find($id)->update($request->all());
+        return back()->with('success', 'Data berhasil diupdate');
     }
 
     /**

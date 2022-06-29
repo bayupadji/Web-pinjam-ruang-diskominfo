@@ -64,19 +64,18 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="post">
+                    <form action="/transaksi/{{ $transaksi->id }}/update" method="post">
                         @csrf
                         <p>Apakah data ingin diverifikasi?</p>
-
-                    </form>
+                        <input type="hidden" name="status" value="Sudah Terverifikasi">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-1" data-bs-dismiss="modal">Batal</button>
-                    <button type="button" class="btn btn-2">Ya</button>
+                    <button type="button" class="btn btn-1" data-bs-dismiss="modal" aria-label="Close">Batal</button>
+                    <button type="submit" class="btn btn-2">Ya</button>
                 </div>
+                </form>
             </div>
         </div>
     </div>
-
 
 @endsection

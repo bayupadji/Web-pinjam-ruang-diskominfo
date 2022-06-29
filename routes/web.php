@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RuanghomeController;
 use App\Http\Controllers\TransaksiController;
+use App\Models\Transaksi;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,7 @@ Route::get('/dashboard', [DashboardController::class, 'count'])->name('dashboard
 
 // transaksi
 Route::get('/transaksi', [TransaksiController::class, 'show'])->name('transaksi');
+Route::post('/transaksi/{transaksi}/update', [TransaksiController::class, 'update']);
 Route::get('/transaksi/{transaksi}/destroy', [TransaksiController::class, 'destroy']);
 
 // user
