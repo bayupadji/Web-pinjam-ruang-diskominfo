@@ -4,8 +4,10 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
+use Illuminate\Support\Facades\Auth;
 
-class IsAdmin
+class checklogin
 {
     /**
      * Handle an incoming request.
@@ -16,10 +18,10 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()->is_admin == 1) {
+        if (!Auth::check()) {
+            return redirect('/login')->with('error', 'Silahkan Login Terlebih Dahulu');
+        } else {
             return $next($request);
         }
-
-        return redirect('/')->with('error', 'Anda tidak memiliki akses ke halaman ini');
     }
 }

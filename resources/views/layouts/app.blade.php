@@ -97,8 +97,8 @@
     {{-- js bootstrap --}}
     <script src="js/bootstrap.bundle.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 
     {{-- js time --}}
     <script type="text/javascript">
@@ -139,7 +139,6 @@
 
     <!-- date -->
     <script type='text/javascript'>
-        <!--
         var months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober',
             'November', 'Desember'
         ];
@@ -152,9 +151,54 @@
         var yy = date.getYear();
         var year = (yy < 1000) ? yy + 1900 : yy;
         document.getElementById('date').innerHTML = thisDay + ', ' + day + ' ' + months[month] + ' ' + year;
-        //
-        -->
     </script>
+
+    {{-- toaster --}}
+    <script>
+        $(document).ready(function() {
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": true,
+                "positionClass": "toast-top-center",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            };
+            @if (Session::has('success'))
+                toastr.success("{{ Session::get('success') }}");
+            @endif
+            @if (Session::has('error'))
+                toastr.error("{{ Session::get('error') }}");
+            @endif
+        });
+    </script>
+
+    {{-- datatable --}}
+    <script>
+        $(document).ready(function() {
+            $('#tables-1').DataTable({
+                responsive: true,
+                select: true,
+                searching: false,
+            });
+        });
+
+        $(document).ready(function() {
+            $('#tables-home').DataTable({
+                responsive: true,
+            });
+        });
+    </script>
+
 
     @stack('script')
 </body>

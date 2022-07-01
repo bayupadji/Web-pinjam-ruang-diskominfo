@@ -5,7 +5,7 @@
         <section class="header my-4">
             <h1 class="fw-bold">Daftar Ruang</h1>
         </section>
-        <div class="row">
+        <div class="row gap-5">
             @foreach ($rview as $ruang)
                 <div class="card" style="width: 20rem;">
                     <img src="{{ asset('storage/images/' . $ruang->foto) }}" class="card-img-top" alt="{{ $ruang->foto }}"

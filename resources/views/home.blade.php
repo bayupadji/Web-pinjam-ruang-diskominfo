@@ -73,9 +73,7 @@
                         <tbody>
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                @foreach ($ruang as $r)
-                                    <td>{{ $r->nama_ruang }}</td>
-                                @endforeach
+                                <td>{{ $ts->ruang->nama_ruang }}</td>
                                 <td>{{ $ts->tanggal_pinjam }}</td>
                                 <td>{{ $ts->jam_pinjam }}</td>
                                 <td>{{ $ts->jam_berakhir }}</td>
@@ -191,17 +189,5 @@
             }
             // console.log(new Date.parse(value));
         }
-
-        $(document).ready(function() {
-            $('#tables-home').DataTable({
-                responsive: true,
-                select: true,
-            });
-            $('#tables-1').DataTable({
-                responsive: true,
-                select: true,
-                searching: false,
-            });
-        });
     </script>
 @endpush

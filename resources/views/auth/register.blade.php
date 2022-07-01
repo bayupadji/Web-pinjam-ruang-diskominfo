@@ -25,18 +25,6 @@
                                 @enderror
                             </div>
 
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control @error('nip') is-invalid @enderror"
-                                    id="floatingInput" name="nip" placeholder="nip" value="{{ old('nip') }}"
-                                    autocomplete="nip" maxlength="18" autofocus>
-                                <label for="floatingInput">NIP</label>
-
-                                @error('nip')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
 
                             <div class="row  g-3">
                                 <div class="col-md">
@@ -55,8 +43,8 @@
                                 </div>
                                 <div class="col-md">
                                     <div class="form-floating mb-3">
-                                        <select class="form-select @error('status') is-invalid @enderror"
-                                            id="floatingSelectGrid" name="status">
+                                        <select class="form-select @error('status') is-invalid @enderror" id=" pns"
+                                            name="status">
                                             <option selected>Pilih Status</option>
                                             <option value="pns">PNS</option>
                                             <option value="non_pns">NON PNS</option>
@@ -64,6 +52,19 @@
                                         <label for="floatingSelectGrid">Status</label>
                                     </div>
                                 </div>
+                            </div>
+
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control @error('nip') is-invalid @enderror" id="nip"
+                                    name="nip" placeholder="nip" value="{{ old('nip') }}" autocomplete="nip"
+                                    maxlength="18" autofocus>
+                                <label for="floatingInput">NIP</label>
+
+                                @error('nip')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
 
                             <div class="form-floating mb-3">

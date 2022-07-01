@@ -74,15 +74,11 @@ class TransaksiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         //
+        Transaksi::where('id', $request->id)->update(['status' => 'Sudah Terverifikasi']);
 
-        $request->validate([
-            'status' => 'required',
-        ]);
-
-        Transaksi::find($id)->update($request->all());
         return back()->with('success', 'Data berhasil diupdate');
     }
 

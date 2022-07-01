@@ -27,12 +27,12 @@ use App\Models\Transaksi;
 Auth::routes();
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::post('/home/store', [HomeController::class, 'store']);
+Route::post('/home/store', [HomeController::class, 'store'])->middleware('is_login');
 Route::get('/dashboard', [DashboardController::class, 'count'])->name('dashboard');
 
 // transaksi
 Route::get('/transaksi', [TransaksiController::class, 'show'])->name('transaksi');
-Route::post('/transaksi/{transaksi}/update', [TransaksiController::class, 'update']);
+Route::post('/transaksi/update', [TransaksiController::class, 'update'])->name('transaksi.update');
 Route::get('/transaksi/{transaksi}/destroy', [TransaksiController::class, 'destroy']);
 
 // user

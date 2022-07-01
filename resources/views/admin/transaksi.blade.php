@@ -7,7 +7,6 @@
             <div class="col-md-12">
                 <div class="card rounded-4 p-1">
                     <div class="card-body">
-
                         <table class="table table-responsive table-striped table-hover" id="tables">
                             <thead>
                                 <th scope="col">No.</th>
@@ -25,12 +24,8 @@
                                 <tbody>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $transaksi->id }}</td>
-                                    @if ($transaksi->user_id != null)
-                                        <td>{{ $transaksi->user->name }}</td>
-                                    @endif
-                                    @foreach ($ruang as $r)
-                                        <td>{{ $r->nama_ruang }}</td>
-                                    @endforeach
+                                    <td>{{ $transaksi->user->name }}</td>
+                                    <td>{{ $transaksi->ruang->nama_ruang }}</td>
                                     <td>{{ $transaksi->tanggal_pinjam }}</td>
                                     <td>{{ $transaksi->jam_pinjam }}</td>
                                     <td>{{ $transaksi->jam_berakhir }}</td>
@@ -38,14 +33,24 @@
                                     @if ($transaksi->status == 'Belum terverifikasi')
                                         <td><span class="badge text-bg-danger">{{ $transaksi->status }}</span></td>
                                     @else
-                                        <td><span class="badge text-bg-success">{{ $transaksi->status }}</span></td>
+                                        <td><span class="badge text-bg-success">{{ $transaksi->status }}</span>
+                                        </td>
                                     @endif
-                                    <td>
-                                        <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModal">
-                                            Verifikasi
-                                        </button>
-                                    </td>
+                                    @if ($transaksi->status == 'Belum terverifikasi')
+                                        <td>
+                                            <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+                                                data-bs-target="#verifikasi" data-bs-id="{{ $transaksi->id }}">
+                                                Verifikasi
+                                            </button>
+                                        </td>
+                                    @else
+                                        <td>
+                                            <button type="button" class="btn btn-outline-success" disabled>
+                                                Verifikasi
+                                            </button>
+                                        </td>
+                                    @endif
+
                                 </tbody>
                             @endforeach
                         </table>
@@ -56,18 +61,18 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="verifikasi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Verifikasi data peminjaman</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="/transaksi/{{ $transaksi->id }}/update" method="post">
+                    <form action="{{ route('transaksi.update') }}" method="post">
                         @csrf
                         <p>Apakah data ingin diverifikasi?</p>
-                        <input type="hidden" name="status" value="Sudah Terverifikasi">
+                        <input type="hidden" name="id" id="idverif">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-1" data-bs-dismiss="modal" aria-label="Close">Batal</button>
@@ -78,4 +83,23 @@
         </div>
     </div>
 
+@endsection
+@section('script')
+    <script>
+        var verifikasi = document.getElementById('verifikasi')
+        verifikasi.addEventListener('show.bs.modal', function(event) {
+            // Button that triggered the modal
+            var button = event.relatedTarget
+            // Extract info from data-bs-* attributes
+            var id = button.getAttribute('data-bs-id')
+            // If necessary, you could initiate an AJAX request here
+            // and then do the updating in a callback.
+            //
+            // Update the modal's content.
+
+            var idField = verifikasi.querySelector('.modal-body #idverif')
+
+            idField.value = id
+        })
+    </script>
 @endsection

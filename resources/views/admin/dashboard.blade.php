@@ -56,13 +56,8 @@
                     </thead>
                     @foreach ($transaksi as $tc)
                         <tbody>
-
-                            @if ($tc->user_id != null)
-                                <td>{{ $tc->user->name }}</td>
-                            @endif
-                            @foreach ($ruang as $r)
-                                <td>{{ $r->nama_ruang }}</td>
-                            @endforeach
+                            <td>{{ $tc->user->name }}</td>
+                            <td>{{ $tc->ruang->nama_ruang }}</td>
                             <td>{{ $tc->keterangan }}</td>
                             <td>{{ $tc->tanggal_pinjam }}</td>
                             <td>{{ $tc->jam_pinjam }}</td>
