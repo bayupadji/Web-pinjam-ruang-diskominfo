@@ -5,9 +5,9 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <div class="card rounded-4 p-1">
+                <div class="card rounded-2 p-1">
                     <div class="card-body">
-                        <table id="tables" class="table table-striped table-responsive table-hover">
+                        <table id="tables-user" class="table table-striped table-responsive table-hover">
                             <thead>
                                 <tr>
                                     <th scope="col">Id</th>
@@ -16,7 +16,7 @@
                                     <th scope="col">Status</th>
                                     <th scope="col">Bidang</th>
                                     <th scope="col">Email</th>
-                                    <th scope="col">Level</th>
+                                    <th scope="col">Role</th>
                                     <th scope="col">Aksi</th>
                                 </tr>
 
@@ -30,7 +30,17 @@
                                         <td>{{ $user->status }}</td>
                                         <td>{{ $user->bidang }}</td>
                                         <td>{{ $user->email }}</td>
-                                        <td>{{ $user->is_admin }}</td>
+                                        <td>
+                                            @if ($user->is_admin == '2')
+                                                Admin
+                                            @elseif ($user->is_admin == '1')
+                                                Super Admin
+                                            @endif
+                                            @if ($user->is_admin == null)
+                                                User
+                                            @endif
+                                        </td>
+                                        </td>
                                         <td>
                                             <a class="btn btn-warning" href="/edituser/{{ $user->id }}/edit"><i
                                                     class="bx bx-edit "></i></a>
@@ -46,4 +56,48 @@
             </div>
         </div>
     </div>
+
+    @push('script')
+        <script>
+            $(document).ready(function() {
+                $('#tables-user').DataTable({
+
+                    dom: 'Bfrtip',
+                    buttons: [{
+                            extend: 'excel',
+                            title: 'User Data',
+                            exportOptions: {
+                                stripHtml: false,
+                                columns: [0, 1, 2, 3, 4, 5, 6]
+                                //specify which column you want to print
+
+                            }
+                        },
+                        {
+                            extend: 'pdf',
+                            title: 'User Data',
+                            exportOptions: {
+                                stripHtml: false,
+                                columns: [0, 1, 2, 3, 4, 5, 6]
+                                //specify which column you want to print
+
+                            }
+                        },
+                        {
+                            extend: 'print',
+                            title: 'User Data',
+                            exportOptions: {
+                                stripHtml: false,
+                                columns: [0, 1, 2, 3, 4, 5, 6]
+                                //specify which column you want to print
+
+                            }
+                        },
+
+                    ]
+                });
+            });
+        </script>
+    @endpush
+
 @endsection

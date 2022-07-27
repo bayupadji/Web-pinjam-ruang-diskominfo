@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RuanghomeController;
 use App\Http\Controllers\TransaksiController;
+
 use App\Models\Transaksi;
 
 /*
@@ -29,6 +30,9 @@ Auth::routes();
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('/home/store', [HomeController::class, 'store'])->middleware('is_login');
 Route::get('/dashboard', [DashboardController::class, 'count'])->name('dashboard');
+Route::get('/daftarpinjam', [HomeController::class, 'showpinjam'])->name('daftarpinjam');
+Route::get('/daftarruang{ruang}', [HomeController::class, 'index']);
+
 
 // transaksi
 Route::get('/transaksi', [TransaksiController::class, 'show'])->name('transaksi');

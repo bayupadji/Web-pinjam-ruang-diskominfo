@@ -27,6 +27,26 @@
                         <label for="floatingInput">NIP</label>
                     </div>
 
+                    @if (Auth::user()->is_admin == 1)
+                        <div class="form-floating mb-3">
+                            <select class="form-select @error('is_admin') is-invalid @enderror" id="role"
+                                name="is_admin">
+                                <option selected value="{{ $user->is_admin }}">
+                                    @if ($user->is_admin == 2)
+                                        Admin
+                                    @elseif ($user->is_admin == 1)
+                                        Super Admin
+                                    @else
+                                        User
+                                    @endif
+                                </option>
+                                <option value="2">Admin</option>
+                                <option value="">User</option>
+                            </select>
+                            <label for="floatingSelectGrid">Role</label>
+                        </div>
+                    @endif
+
                     <div class="row mb-3">
                         <div class="col">
                             <div class="form-floating mb-3">
@@ -38,8 +58,9 @@
                                 </select>
                                 <label for="floatingSelectGrid">Status</label>
                             </div>
-
                         </div>
+
+
                         <div class="col">
                             <div class="form-floating mb-3">
                                 <select class="form-select  @error('bidang') is-invalid @enderror" name="bidang"

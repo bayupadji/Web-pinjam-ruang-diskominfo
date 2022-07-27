@@ -2,8 +2,8 @@
 @section('title', 'Login')
 
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
+    <div class="container-sm py-5">
+        <div class="row justify-content-center py-4">
             <div class="col-md-5 p-3">
                 <div class="card p-5 shadow-lg p-3 mb-5 bg-body rounded-5">
                     <div class="card-body">

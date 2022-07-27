@@ -16,7 +16,9 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()->is_admin == 1) {
+        // is_admin == 1 = super admin
+        // is_admin == 2 = admin
+        if (auth()->user()->is_admin == 1 && auth()->user()->is_admin == 2) {
             return $next($request);
         }
 

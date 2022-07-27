@@ -37,15 +37,16 @@ class RuangController extends Controller
     public function store(Request $request)
     {
         //tambah data ruang
-        $request->validate([
-            'foto' => 'file',
-        ]);
-
-        $filefoto = $request->file('foto')->store('public/images');
-        $namefoto = explode('/', $filefoto);
-
+        $namefoto = null;
+        // dd($request->file('foto'));
+        if ($request->file('foto')) {
+            $filefoto = $request->file('foto')->store('public/images');
+            $split = explode('/', $filefoto);
+            $namefoto = $split[2];
+        }
+        // dd($filefoto);
         Ruang::create([
-            'foto' => $namefoto[2],
+            'foto' => $namefoto,
             'nama_ruang' => $request->nama_ruang,
             'lantai' => $request->lantai,
             'deskripsi' => $request->deskripsi,

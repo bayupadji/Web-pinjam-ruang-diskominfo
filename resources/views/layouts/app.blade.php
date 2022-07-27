@@ -25,6 +25,13 @@
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 
+    <!-- AOS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    {{-- calender --}}
+    <link href="{{ asset('fullcalendar/lib/main.css') }}" rel='stylesheet' />
+    <link href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css' rel='stylesheet'>
+
 
     <title>@yield('title')</title>
 
@@ -32,10 +39,10 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-lg sticky-top p-3">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-lg sticky-top p-3">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    <img src="{{ asset('images/logokominfoputih.png') }}" width="200px" alt="Logo">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -46,40 +53,53 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('home') }}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('ruang') }}">Ruang</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="" data-bs-toggle="modal"
+                                data-bs-target="#pinjamruang">Pinjam</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('daftarpinjam') }}">Daftar Peminjaman</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#kalender">Kalender</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('ruang') }}">{{ __('Ruang') }}</a>
-                        </li>
+
                         @guest
                             @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link btn btn-1" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <li class="nav-item ">
+                                    <button class="btn buttonlgn ms-lg-3 px-4"
+                                        onClick="window.location.href='{{ route('login') }}'">Login
+                                    </button>
                                 </li>
                             @endif
                         @else
-                            @if (Auth::user()->is_admin == '1')
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a>
+                            @if (Auth::user()->is_admin == '1' || Auth::user()->is_admin == '2')
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
                                 </li>
                             @endif
 
                             @if (Auth::check())
-                                <li class="nav-item">
-                                    <a class="text-dark nav-link">{{ Auth::user()->name }}</a>
-                                </li>
-                                <li class="nav-item">
-
-                                    <a class="btn btn-1" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                                                                                                                                                         document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                <li class="nav-item ">
+                                    <form action="{{ route('logout') }}" method="POST">
                                         @csrf
+                                        <button class="btn buttonlgn ms-lg-3 px-4" type="submit">
+                                            Logout
+                                        </button>
                                     </form>
                                 </li>
                             @endif
@@ -87,11 +107,99 @@
                     </ul>
                 </div>
             </div>
+
         </nav>
 
-        <main class="py-4">
+        {{-- <div class="marquee">
+            <div class="container-sm">
+                @if (Auth::check())
+                    <marquee direction="right" height="20px">
+                        <strong>Selamat Datang, {{ Auth::user()->name }} || Peminjaman Hari ini :</strong>
+                    </marquee>
+                @else
+                    <marquee direction="right" height="20px">
+                        <strong>Peminjaman Hari ini : </strong>
+                    </marquee>
+                @endif
+            </div>
+        </div> --}}
+
+        {{-- content --}}
+        <main>
             @yield('content')
         </main>
+
+        {{-- footer --}}
+        <footer class="footer bg-dark text-white p-5 mt-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <p class="text-center text-white">
+                            <strong>Copyright &copy; 2022</strong>
+                            <i>Created by Diskominfo JATENG</i>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Modal -->
+        <div class="modal fade" id="pinjamruang" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title fw-bold" id="exampleModalLabel">Pinjam Ruang</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="/home/store" method="post">
+                            @csrf
+                            <div class="form-floating mb-3">
+                                <input type="date" class="form-control" id="floatingInput" name="tanggal_pinjam">
+                                <label for="floatingInput">Pilih Tanggal</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <select class="form-select" id="floatingSelect"
+                                    aria-label="Floating label select example" name="ruang_id">
+                                    <option selected>Silahkan pilih ruang</option>
+                                    @foreach ($ruang as $b)
+                                        <option value="{{ $b->id }}">{{ $b->nama_ruang }}</option>
+                                    @endforeach
+                                </select>
+                                <label for="floatingSelect">Pilih Ruang</label>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-floating mb-3">
+                                        <input type="time" class="form-control" id="jamakhir" name="jam_pinjam">
+                                        <label for="floatingTextarea2">Jam Mulai</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating mb-3">
+                                        <input type="time" class="form-control" id="jamakhir"
+                                            name="jam_berakhir">
+                                        <label for="floatingTextarea2">Jam Selesai</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-floating">
+                                <textarea class="form-control" placeholder="Tulis keterangan disini" id="floatingTextarea2" style="height: 100px"
+                                    name="keterangan"></textarea>
+                                <label for="floatingTextarea2">Keterangan</label>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-1">Simpan</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
     </div>
 
     {{-- js bootstrap --}}
@@ -99,61 +207,14 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="fullcalendar/lib/main.js"></script>
 
-    {{-- js time --}}
-    <script type="text/javascript">
-        <!--
-        function showTime() {
-            var a_p = "";
-            var today = new Date();
-            var curr_hour = today.getHours();
-            var curr_minute = today.getMinutes();
-            var curr_second = today.getSeconds();
-            if (curr_hour < 12) {
-                a_p = "AM";
-            } else {
-                a_p = "PM";
-            }
-            if (curr_hour == 0) {
-                curr_hour = 12;
-            }
-            if (curr_hour > 12) {
-                curr_hour = curr_hour - 12;
-            }
-            curr_hour = checkTime(curr_hour);
-            curr_minute = checkTime(curr_minute);
-            curr_second = checkTime(curr_second);
-            document.getElementById('clock').innerHTML = curr_hour + ":" + curr_minute + ":" + curr_second + " " + a_p;
-        }
-
-        function checkTime(i) {
-            if (i < 10) {
-                i = "0" + i;
-            }
-            return i;
-        }
-        setInterval(showTime, 500);
-        //
-        -->
+    {{-- AOS --}}
+    <script>
+        AOS.init();
     </script>
 
-    <!-- date -->
-    <script type='text/javascript'>
-        var months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober',
-            'November', 'Desember'
-        ];
-        var myDays = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
-        var date = new Date();
-        var day = date.getDate();
-        var month = date.getMonth();
-        var thisDay = date.getDay(),
-            thisDay = myDays[thisDay];
-        var yy = date.getYear();
-        var year = (yy < 1000) ? yy + 1900 : yy;
-        document.getElementById('date').innerHTML = thisDay + ', ' + day + ' ' + months[month] + ' ' + year;
-    </script>
-
-    {{-- toaster --}}
     <script>
         $(document).ready(function() {
             toastr.options = {
@@ -195,10 +256,11 @@
         $(document).ready(function() {
             $('#tables-home').DataTable({
                 responsive: true,
+                select: true,
+
             });
         });
     </script>
-
 
     @stack('script')
 </body>

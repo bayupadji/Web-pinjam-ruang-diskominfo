@@ -7,7 +7,7 @@
             <div class="col-md-12">
                 <div class="card rounded-4 p-1">
                     <div class="card-body">
-                        <table class="table table-responsive table-striped table-hover" id="tables">
+                        <table class="table table-responsive table-striped table-hover" id="tables-transaksi">
                             <thead>
                                 <th scope="col">No.</th>
                                 <th scope="col">id</th>
@@ -20,39 +20,42 @@
                                 <th scope="col">Status</th>
                                 <th scope="col">Aksi</th>
                             </thead>
-                            @foreach ($transaksi as $transaksi)
-                                <tbody>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $transaksi->id }}</td>
-                                    <td>{{ $transaksi->user->name }}</td>
-                                    <td>{{ $transaksi->ruang->nama_ruang }}</td>
-                                    <td>{{ $transaksi->tanggal_pinjam }}</td>
-                                    <td>{{ $transaksi->jam_pinjam }}</td>
-                                    <td>{{ $transaksi->jam_berakhir }}</td>
-                                    <td>{{ $transaksi->keterangan }}</td>
-                                    @if ($transaksi->status == 'Belum terverifikasi')
-                                        <td><span class="badge text-bg-danger">{{ $transaksi->status }}</span></td>
-                                    @else
-                                        <td><span class="badge text-bg-success">{{ $transaksi->status }}</span>
-                                        </td>
-                                    @endif
-                                    @if ($transaksi->status == 'Belum terverifikasi')
-                                        <td>
-                                            <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
-                                                data-bs-target="#verifikasi" data-bs-id="{{ $transaksi->id }}">
-                                                Verifikasi
-                                            </button>
-                                        </td>
-                                    @else
-                                        <td>
-                                            <button type="button" class="btn btn-outline-success" disabled>
-                                                Verifikasi
-                                            </button>
-                                        </td>
-                                    @endif
+                            <tbody>
+                                @foreach ($transaksi as $transaksi)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $transaksi->id }}</td>
+                                        <td>{{ $transaksi->user->name }}</td>
+                                        <td>{{ $transaksi->ruang->nama_ruang }}</td>
+                                        <td>{{ $transaksi->tanggal_pinjam }}</td>
+                                        <td>{{ $transaksi->jam_pinjam }}</td>
+                                        <td>{{ $transaksi->jam_berakhir }}</td>
+                                        <td>{{ $transaksi->keterangan }}</td>
+                                        @if ($transaksi->status == 'Belum terverifikasi')
+                                            <td><span class="badge text-bg-danger">{{ $transaksi->status }}</span></td>
+                                        @else
+                                            <td><span class="badge text-bg-success">{{ $transaksi->status }}</span>
+                                            </td>
+                                        @endif
+                                        @if ($transaksi->status == 'Belum terverifikasi')
+                                            <td>
+                                                <button type="button" class="btn btn-outline-success"
+                                                    data-bs-toggle="modal" data-bs-target="#verifikasi"
+                                                    data-bs-id="{{ $transaksi->id }}">
+                                                    Verifikasi
+                                                </button>
+                                            </td>
+                                        @else
+                                            <td>
+                                                <button type="button" class="btn btn-outline-success" disabled>
+                                                    Verifikasi
+                                                </button>
+                                            </td>
+                                        @endif
 
-                                </tbody>
-                            @endforeach
+                                    </tr>
+                                @endforeach
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -84,7 +87,8 @@
     </div>
 
 @endsection
-@section('script')
+
+@push('script')
     <script>
         var verifikasi = document.getElementById('verifikasi')
         verifikasi.addEventListener('show.bs.modal', function(event) {
@@ -102,4 +106,45 @@
             idField.value = id
         })
     </script>
-@endsection
+
+    <script>
+        $(document).ready(function() {
+            $('#tables-transaksi').DataTable({
+
+                dom: 'Bfrtip',
+                buttons: [{
+                        extend: 'excel',
+                        title: 'Transaksi Data',
+                        exportOptions: {
+                            stripHtml: false,
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                            //specify which column you want to print
+
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        title: 'Transaksi Data',
+                        exportOptions: {
+                            stripHtml: false,
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                            //specify which column you want to print
+
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        title: 'Transaksi Data',
+                        exportOptions: {
+                            stripHtml: false,
+                            columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                            //specify which column you want to print
+
+                        }
+                    },
+
+                ]
+            });
+        });
+    </script>
+@endpush

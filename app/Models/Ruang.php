@@ -11,4 +11,9 @@ class Ruang extends Model
 
     protected $table = 'ruangs';
     protected $guarded = ['id'];
+
+    public function transaksi()
+    {
+        return $this->hasMany(Transaksi::class);
+    }
 }

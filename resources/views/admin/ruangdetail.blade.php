@@ -27,8 +27,14 @@
                                 @foreach ($ruang as $ruang)
                                     <tr>
                                         <td>{{ $ruang->id }}</td>
-                                        <td><img width="200px" src="{{ asset('storage/images/' . $ruang->foto) }}"
-                                                alt="{{ $ruang->foto }}"></td>
+                                        <td>
+                                            <img width="200px" src="{{ asset('storage/images/' . $ruang->foto) }}"
+                                                alt="{{ $ruang->foto }}">
+                                            @if ($ruang->foto == null)
+                                                <img width="200px" src="{{ asset('images/default.jpg') }}"
+                                                    class="img-fluid" width="100px">
+                                            @endif
+                                        </td>
                                         <td>{{ $ruang->nama_ruang }}</td>
                                         <td>{{ $ruang->lantai }}</td>
                                         <td>{{ $ruang->kapasitas }}</td>

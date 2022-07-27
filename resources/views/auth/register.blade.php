@@ -3,7 +3,7 @@
 @section('title', 'Register')
 
 @section('content')
-    <div class="container">
+    <div class="container-sm py-5">
         <div class="row justify-content-center">
             <div class="col-md-5 p-3">
                 <div class="card p-5 shadow-lg p-3 mb-5 bg-body rounded-5">
@@ -43,7 +43,7 @@
                                 </div>
                                 <div class="col-md">
                                     <div class="form-floating mb-3">
-                                        <select class="form-select @error('status') is-invalid @enderror" id=" pns"
+                                        <select class="form-select @error('status') is-invalid @enderror" id="pns"
                                             name="status">
                                             <option selected>Pilih Status</option>
                                             <option value="pns">PNS</option>
@@ -57,7 +57,7 @@
                             <div class="form-floating mb-3">
                                 <input type="text" class="form-control @error('nip') is-invalid @enderror" id="nip"
                                     name="nip" placeholder="nip" value="{{ old('nip') }}" autocomplete="nip"
-                                    maxlength="18" autofocus>
+                                    maxlength="18" autofocus disabled>
                                 <label for="floatingInput">NIP</label>
 
                                 @error('nip')
@@ -112,3 +112,15 @@
             </div>
         </div>
     @endsection
+
+    @push('script')
+        <script>
+            $("#pns").change(function() {
+                if ($(this).val() == "non_pns") {
+                    $("#nip").attr("disabled", "disabled");
+                } else {
+                    $("#nip").removeAttr("disabled");
+                }
+            }).trigger("change");
+        </script>
+    @endpush

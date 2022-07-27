@@ -30,33 +30,37 @@ class HomeController extends Controller
     {
         $ruang = Ruang::all();
 
-        // dd($ruang);
-        $datatrans = Transaksi::where('tanggal_pinjam', date('Y-m-d'))->get();
-        $oprasional = jams::where('id', '1')->first();
+        // calendar
+        $event = array();
+        $transaksi = Transaksi::all();
 
-        $available = [];
+        foreach ($transaksi as $tcalender) {
+            if ($tcalender->status == 'Sudah Terverifikasi') {
+                $event[] = array(
+                    'id' => $tcalender->id,
+                    'title' => $tcalender->ruang->nama_ruang,
+                    'start' => $tcalender->tanggal_pinjam . ' ' . $tcalender->jam_pinjam,
+                    'end' => $tcalender->tanggal_pinjam . ' ' . $tcalender->jam_berakhir,
+                    'description' => $tcalender->keterangan
 
-        $jam = new DateTime($oprasional->jam_awal);
-        $transit = '';
-        $jamakhir = new DateTime($oprasional->jam_akhir);
-        $loop = true;
-        // $available += [$jam->format('h:i:s') => true];
-        // dd($available);
-        while ($loop) {
-            $listime = array($jam->format('H:i'), true);
-            array_push($available, $listime);
-            // $available += [$jam->format('H:i:s') => true];
-            date_add($jam, date_interval_create_from_date_string('1 hours'));
-            $transit = $jam->format('H:i:s');
-            if ($jam->format('H:i:s') == $jamakhir->format('H:i:s')) {
-                // $available += [$jam->format('H:i:s') => true];
-                $loop = false;
+                );
             }
-            $jam = new DateTime($transit);
+            // dd(date('Y / M / d', strtotime($tcalender->tanggal_pinjam . ' ' . $tcalender->jam_pinjam)));
         }
-        // dd(count($available));
+        // dd($event);
 
-        //kondisi ketika user pinjam ruang
+        return view('home', ['ruang' => $ruang, 'event' => $event]);
+    }
+
+    public function ruangdetail()
+    {
+        $ruang = Ruang::all();
+        return view('ruangdetail', ['ruang' => $ruang]);
+    }
+
+    public function showpinjam()
+    {
+        $ruang = Ruang::all();
         if (Auth::check()) {
             $user = Auth::user();
             $transaksi = Transaksi::where('user_id', $user->id)->get();
@@ -66,7 +70,7 @@ class HomeController extends Controller
             $ctransaksi = 0;
         }
 
-        return view('home', ['ruang' => $ruang, 'counttran' => $ctransaksi, 'available' => $available, 'transaksi' => $transaksi]);
+        return view('daftarpinjam', ['transaksi' => $transaksi, 'ctransaksi' => $ctransaksi, 'ruang' => $ruang]);
     }
 
     public function store()
@@ -87,9 +91,9 @@ class HomeController extends Controller
 
             // dd($transaksi);
 
-            return redirect('/')->with('success', 'Transaksi berhasil, silahkan tunggu verifikasi dari admin');
+            return redirect('/daftarpinjam')->with('success', 'Transaksi berhasil, silahkan tunggu verifikasi dari admin');
         } else {
-            return redirect('/')->with('error', 'Silahkan login terlebih dahulu');
+            return redirect('/daftarpinjam')->with('error', 'Silahkan login terlebih dahulu');
         }
     }
 

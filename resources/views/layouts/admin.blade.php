@@ -127,8 +127,37 @@
             $('#tables').DataTable({
 
                 dom: 'Bfrtip',
-                buttons: [
-                    'excel', 'pdf', 'print'
+                buttons: [{
+                        extend: 'excel',
+                        title: 'Detail Ruang',
+                        exportOptions: {
+                            stripHtml: false,
+                            columns: [0, 2, 3, 4, 5, 6]
+                            //specify which column you want to print
+
+                        }
+                    },
+                    {
+                        extend: 'pdf',
+                        title: 'Detail Ruang',
+                        exportOptions: {
+                            stripHtml: false,
+                            columns: [0, 2, 3, 4, 5, 6]
+                            //specify which column you want to print
+
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        title: 'Detail Ruang',
+                        exportOptions: {
+                            stripHtml: false,
+                            columns: [0, 2, 3, 4, 5, 6]
+                            //specify which column you want to print
+
+                        }
+                    },
+
                 ]
             });
         });
@@ -159,7 +188,7 @@
             @endif
         });
     </script>
-    @yield('script')
+    @stack('script')
 </body>
 
 </html>
