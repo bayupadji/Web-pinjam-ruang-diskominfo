@@ -15,6 +15,7 @@
                         <th>Nama</th>
                         <th>Ruang</th>
                         <th>Tanggal Pinjam</th>
+                        <th>Tanggal Selesai</th>
                         <th>Jam Pinjam</th>
                         <th>Jam Selesai</th>
                         <th>Keterangan</th>
@@ -28,6 +29,7 @@
                             <td>{{ $p->user->name }}</td>
                             <td>{{ $p->ruang->nama_ruang }}</td>
                             <td>{{ $p->tanggal_pinjam }}</td>
+                            <td>{{ $p->tanggal_selesai }}</td>
                             <td>{{ $p->jam_pinjam }}</td>
                             <td>{{ $p->jam_berakhir }}</td>
                             <td>{{ $p->keterangan }}</td>

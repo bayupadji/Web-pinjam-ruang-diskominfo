@@ -57,7 +57,7 @@
                             <div class="form-floating mb-3">
                                 <input type="text" class="form-control @error('nip') is-invalid @enderror" id="nip"
                                     name="nip" placeholder="nip" value="{{ old('nip') }}" autocomplete="nip"
-                                    maxlength="18" autofocus disabled>
+                                    maxlength="18" autofocus>
                                 <label for="floatingInput">NIP</label>
 
                                 @error('nip')
@@ -117,9 +117,9 @@
         <script>
             $("#pns").change(function() {
                 if ($(this).val() == "non_pns") {
-                    $("#nip").attr("disabled", "disabled");
+                    $("#nip").attr("readonly", "readonly");
                 } else {
-                    $("#nip").removeAttr("disabled");
+                    $("#nip").removeAttr("readonly");
                 }
             }).trigger("change");
         </script>

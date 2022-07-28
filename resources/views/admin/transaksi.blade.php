@@ -14,6 +14,7 @@
                                 <th scope="col">Nama user</th>
                                 <th scope="col">Nama Ruang</th>
                                 <th scope="col">Tanggal pinjam</th>
+                                <th scope="col">Tanggal selesai</th>
                                 <th scope="col">Jam Pinjam</th>
                                 <th scope="col">Jam Berakhir</th>
                                 <th scope="col">Keterangan</th>
@@ -28,6 +29,7 @@
                                         <td>{{ $transaksi->user->name }}</td>
                                         <td>{{ $transaksi->ruang->nama_ruang }}</td>
                                         <td>{{ $transaksi->tanggal_pinjam }}</td>
+                                        <td>{{ $transaksi->tanggal_selesai }}</td>
                                         <td>{{ $transaksi->jam_pinjam }}</td>
                                         <td>{{ $transaksi->jam_berakhir }}</td>
                                         <td>{{ $transaksi->keterangan }}</td>

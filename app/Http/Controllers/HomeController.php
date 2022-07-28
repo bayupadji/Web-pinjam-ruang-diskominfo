@@ -40,7 +40,7 @@ class HomeController extends Controller
                     'id' => $tcalender->id,
                     'title' => $tcalender->ruang->nama_ruang,
                     'start' => $tcalender->tanggal_pinjam . ' ' . $tcalender->jam_pinjam,
-                    'end' => $tcalender->tanggal_pinjam . ' ' . $tcalender->jam_berakhir,
+                    'end' => $tcalender->tanggal_selesai . ' ' . $tcalender->jam_berakhir,
                     'description' => $tcalender->keterangan
 
                 );
@@ -49,7 +49,7 @@ class HomeController extends Controller
         }
         // dd($event);
 
-        return view('home', ['ruang' => $ruang, 'event' => $event]);
+        return view('home', ['ruang' => $ruang, 'event' => $event, 'transaksi' => $transaksi]);
     }
 
     public function ruangdetail()
@@ -83,6 +83,7 @@ class HomeController extends Controller
             $transaksi->user_id = $user->id;
             $transaksi->ruang_id = request('ruang_id');
             $transaksi->tanggal_pinjam = request('tanggal_pinjam');
+            $transaksi->tanggal_selesai = request('tanggal_selesai');
             $transaksi->jam_pinjam = request('jam_pinjam');
             $transaksi->jam_berakhir = request('jam_berakhir');
             $transaksi->keterangan = request('keterangan');

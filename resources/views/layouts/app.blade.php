@@ -24,6 +24,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 
     <!-- AOS -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
@@ -69,9 +70,6 @@
                             <a class="nav-link" href="{{ route('daftarpinjam') }}">Daftar Peminjaman</a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="#kalender">Kalender</a>
-                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -154,9 +152,24 @@
                     <div class="modal-body">
                         <form action="/home/store" method="post">
                             @csrf
-                            <div class="form-floating mb-3">
-                                <input type="date" class="form-control" id="floatingInput" name="tanggal_pinjam">
-                                <label for="floatingInput">Pilih Tanggal</label>
+                            {{-- <div class="row">
+                                <input id="date">
+                            </div> --}}
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-floating mb-3">
+                                        <input type="date" class="form-control" id="floatingInput tgl_mulai "
+                                            name="tanggal_pinjam">
+                                        <label for="floatingInput">Pilih Tanggal Mulai</label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="form-floating mb-3">
+                                        <input type="date" class="form-control" id="floatingInput tgl_selesai"
+                                            name="tanggal_selesai">
+                                        <label for="floatingInput">Pilih Tanggal Selesai</label>
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-floating mb-3">
                                 <select class="form-select" id="floatingSelect"
@@ -205,6 +218,7 @@
     {{-- js bootstrap --}}
     <script src="js/bootstrap.bundle.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
@@ -261,6 +275,30 @@
             });
         });
     </script>
+
+    <script>
+        var app = @json($transaksi);
+        // console.log(app);
+        var booked = [];
+
+        for (var i = 0; i < app.length; i++) {
+            booked.push(app[i].tanggal_pinjam);
+        }
+        // console.log(booked);
+
+        $(document).ready(function() {
+            $('#date').datepicker({
+                minDate: 0,
+                maxDate: '+1Y',
+                dateFormat: 'yy-mm-dd',
+                beforeShowDay: function(date) {
+                    var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
+                    return [booked.indexOf(string) == -1];
+                }
+            });
+        });
+    </script>
+
 
     @stack('script')
 </body>

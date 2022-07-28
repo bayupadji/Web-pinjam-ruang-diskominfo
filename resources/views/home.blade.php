@@ -35,7 +35,6 @@
             <div id="calendar"></div>
         </div>
 
-
         <!-- END HERO -->
     @endsection
 
@@ -65,9 +64,6 @@
                         minute: '2-digit',
                         meridiem: true,
                     },
-
-
-
                 });
 
                 calendar.render();

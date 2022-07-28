@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('lantai');
             $table->integer('kapasitas');
             $table->string('deskripsi');
-            $table->string('foto');
+            $table->string('foto')->nullable();
             $table->string('status');
             $table->timestamps();
         });

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('user_id');
             $table->string('keterangan');
             $table->date('tanggal_pinjam');
+            $table->date('tanggal_selesai');
             $table->time('jam_pinjam');
             $table->time('jam_berakhir');
             $table->string('status');

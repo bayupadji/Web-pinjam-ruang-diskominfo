@@ -15,6 +15,7 @@ class Transaksi extends Model
         'user_id',
         'keterangan',
         'tanggal_pinjam',
+        'tanggal_selesai',
         'jam_pinjam',
         'jam_berakhir',
         'status',
