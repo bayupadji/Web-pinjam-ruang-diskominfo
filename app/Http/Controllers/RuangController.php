@@ -65,7 +65,7 @@ class RuangController extends Controller
     public function show()
     {
         //menampilkan data
-        $ruang = Ruang::all();
+        $ruang = Ruang::all()->sortByDesc('nama_ruang');
         return view('admin.ruangdetail', ['ruang' => $ruang],);
     }
 
@@ -91,15 +91,16 @@ class RuangController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $request->validate([
-            'foto' => 'file',
-        ]);
-
-        $filefoto = $request->file('foto')->store('public/images');
-        $namefoto = explode('/', $filefoto);
+        $namefoto = null;
+        // dd($request->file('foto'));
+        if ($request->file('foto')) {
+            $filefoto = $request->file('foto')->store('public/images');
+            $split = explode('/', $filefoto);
+            $namefoto = $split[2];
+        }
 
         Ruang::find($id)->update([
-            'foto' => $namefoto[2],
+            'foto' => $namefoto,
             'nama_ruang' => $request->nama_ruang,
             'lantai' => $request->lantai,
             'deskripsi' => $request->deskripsi,

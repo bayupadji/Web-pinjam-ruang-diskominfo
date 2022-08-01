@@ -11,7 +11,7 @@ class DashboardController extends Controller
     //menghitung data
     public function count()
     {
-        $transaksi = Transaksi::all(); //call transaksi db
+        $transaksi = Transaksi::all()->sortByDesc('created_at'); //call transaksi db
         $usercount = count(User::all()); //count user db
         $transaksicount = count($transaksi); //count transaksi db
         $ruangcount = count(Ruang::all()); //count ruang db

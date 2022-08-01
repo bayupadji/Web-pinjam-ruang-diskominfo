@@ -53,7 +53,7 @@ class TransaksiController extends Controller
         //menampilkan data
         $userid = User::all();
         $ruang = Ruang::all();
-        $transaksi = Transaksi::all();
+        $transaksi = Transaksi::all()->sortByDesc('created_at');
         return view('admin.transaksi', ['transaksi' => $transaksi], ['ruang' => $ruang], ['uid' => $userid]);
     }
 
@@ -81,6 +81,7 @@ class TransaksiController extends Controller
 
         return back()->with('success', 'Data berhasil diupdate');
     }
+
 
     /**
      * Remove the specified resource from storage.

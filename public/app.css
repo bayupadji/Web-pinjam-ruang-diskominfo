@@ -93,6 +93,22 @@
     transition: 450ms !important;
 }
 
+/* .buttonkln {
+    font-weight: bolder !important;
+    border: 2px solid var(--red) !important;
+    border-radius: 30px !important;
+    cursor: pointer !important;
+
+    color: var(--white) !important;
+}
+
+.buttonkln:hover {
+    border: 2px solid var(--red) !important;
+    background-color: var(--red) !important;
+    color: var(--cw) !important;
+    transition: 450ms !important;
+} */
+
 .btn-1 {
     background-color: var(--red) !important;
     border-radius: 10px !important;
@@ -126,32 +142,15 @@
 }
 
 .form-control {
-    border-radius: 15px !important;
-    border: none !important;
+    border-radius: 5px !important;
     background-color: #f1f1f1 !important;
     color: #000 !important;
 }
 
 .form-select {
-    border-radius: 15px !important;
-    border: none !important;
+    border-radius: 5px !important;
     background-color: #f1f1f1 !important;
     color: #000 !important;
-}
-
-/* .card {
-    border: none !important;
-    box-shadow: 0px 71px 150px rgba(56, 1, 1, 0.07),
-        0px 29.6621px 62.6664px rgba(56, 1, 1, 0.0503198),
-        0px 15.8588px 33.5045px rgba(56, 1, 1, 0.0417275),
-        0px 8.8903px 18.7823px rgba(56, 1, 1, 0.035),
-        0px 4.72157px 9.97515px rgba(56, 1, 1, 0.0282725),
-        0px 1.96475px 4.15088px rgba(56, 1, 1, 0.0196802) !important;
-    border-radius: 5px !important;
-} */
-
-.modal {
-    border: none !important;
 }
 
 /* admin */

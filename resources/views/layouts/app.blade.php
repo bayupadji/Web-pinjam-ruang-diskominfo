@@ -108,19 +108,6 @@
 
         </nav>
 
-        {{-- <div class="marquee">
-            <div class="container-sm">
-                @if (Auth::check())
-                    <marquee direction="right" height="20px">
-                        <strong>Selamat Datang, {{ Auth::user()->name }} || Peminjaman Hari ini :</strong>
-                    </marquee>
-                @else
-                    <marquee direction="right" height="20px">
-                        <strong>Peminjaman Hari ini : </strong>
-                    </marquee>
-                @endif
-            </div>
-        </div> --}}
 
         {{-- content --}}
         <main>
@@ -152,25 +139,7 @@
                     <div class="modal-body">
                         <form action="/home/store" method="post">
                             @csrf
-                            {{-- <div class="row">
-                                <input id="date">
-                            </div> --}}
-                            <div class="row">
-                                <div class="col">
-                                    <div class="form-floating mb-3">
-                                        <input type="date" class="form-control" id="floatingInput tgl_mulai "
-                                            name="tanggal_pinjam">
-                                        <label for="floatingInput">Pilih Tanggal Mulai</label>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-floating mb-3">
-                                        <input type="date" class="form-control" id="floatingInput tgl_selesai"
-                                            name="tanggal_selesai">
-                                        <label for="floatingInput">Pilih Tanggal Selesai</label>
-                                    </div>
-                                </div>
-                            </div>
+
                             <div class="form-floating mb-3">
                                 <select class="form-select" id="floatingSelect"
                                     aria-label="Floating label select example" name="ruang_id">
@@ -179,21 +148,39 @@
                                         <option value="{{ $b->id }}">{{ $b->nama_ruang }}</option>
                                     @endforeach
                                 </select>
-                                <label for="floatingSelect">Pilih Ruang</label>
+                                <label for="floatingSelect">Pilih Ruang*</label>
                             </div>
 
                             <div class="row">
                                 <div class="col">
                                     <div class="form-floating mb-3">
-                                        <input type="time" class="form-control" id="jamakhir" name="jam_pinjam">
-                                        <label for="floatingTextarea2">Jam Mulai</label>
+                                        <input type="date" class="form-control" id="floatingInput tgl_mulai "
+                                            name="tanggal_pinjam">
+                                        <label for="floatingInput">Pilih Tanggal Mulai*</label>
+                                    </div>
+                                </div>
+
+                                <div class="col">
+                                    <div class="form-floating mb-3">
+                                        <input type="date" class="form-control" id="floatingInput tgl_selesai"
+                                            name="tanggal_selesai">
+                                        <label for="floatingInput">Pilih Tanggal Selesai*</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-floating mb-3">
+                                        <input type="time" class="form-control" id="timestart" name="jam_pinjam">
+                                        <label for="floatingTextarea2">Jam Mulai*</label>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="form-floating mb-3">
-                                        <input type="time" class="form-control" id="jamakhir"
+                                        <input type="time" class="form-control" id="timeend"
                                             name="jam_berakhir">
-                                        <label for="floatingTextarea2">Jam Selesai</label>
+                                        <label for="floatingTextarea2">Jam Selesai*</label>
                                     </div>
                                 </div>
                             </div>
@@ -201,8 +188,10 @@
                             <div class="form-floating">
                                 <textarea class="form-control" placeholder="Tulis keterangan disini" id="floatingTextarea2" style="height: 100px"
                                     name="keterangan"></textarea>
-                                <label for="floatingTextarea2">Keterangan</label>
+                                <label for="floatingTextarea2">Keterangan*</label>
                             </div>
+
+                            <label class="fw-light py-3">(*) Wajib diisi</label>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-1">Simpan</button>
@@ -272,29 +261,6 @@
                 responsive: true,
                 select: true,
 
-            });
-        });
-    </script>
-
-    <script>
-        var app = @json($transaksi);
-        // console.log(app);
-        var booked = [];
-
-        for (var i = 0; i < app.length; i++) {
-            booked.push(app[i].tanggal_pinjam);
-        }
-        // console.log(booked);
-
-        $(document).ready(function() {
-            $('#date').datepicker({
-                minDate: 0,
-                maxDate: '+1Y',
-                dateFormat: 'yy-mm-dd',
-                beforeShowDay: function(date) {
-                    var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
-                    return [booked.indexOf(string) == -1];
-                }
             });
         });
     </script>

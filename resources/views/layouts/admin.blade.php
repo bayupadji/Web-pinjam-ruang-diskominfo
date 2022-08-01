@@ -24,7 +24,7 @@
     <div class="sidebar close">
         <div class="logo-details">
             <i class='bx bxl-c-plus-plus'></i>
-            <span class="logo_name">Admin Page</span>
+            <span class="logo_name">Dashboard</span>
         </div>
         <ul class="nav-links">
             <li>
@@ -60,8 +60,8 @@
                         <!--<img src="image/profile.jpg" alt="profileImg">-->
                     </div>
                     <div class="name-job">
-                        <div class="profile_name">Admin</div>
-                        <div class="job">Admin</div>
+                        <div class="profile_name">{{ Auth::user()->name }}</div>
+                        <div class="job">{{ Auth::user()->name }}</div>
                     </div>
                     <a href="{{ route('logout') }}"
                         onclick="event.preventDefault();

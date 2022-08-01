@@ -7,7 +7,8 @@
             <div class="col-md-12">
                 <div class="card rounded-2 p-1">
                     <div class="card-body">
-                        <table id="tables-user" class="table table-striped table-responsive table-hover">
+                        <table id="tables-user"
+                            class="table border table-striped table-bordered table-responsive table-hover">
                             <thead>
                                 <tr>
                                     <th scope="col">Id</th>
@@ -35,8 +36,7 @@
                                                 Admin
                                             @elseif ($user->is_admin == '1')
                                                 Super Admin
-                                            @endif
-                                            @if ($user->is_admin == null)
+                                            @else
                                                 User
                                             @endif
                                         </td>

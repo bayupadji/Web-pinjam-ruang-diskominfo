@@ -12,7 +12,7 @@
                             Tambah Ruang
                         </button>
 
-                        <table class="table table-responsive table-striped table-hover" id="tables">
+                        <table class="table border table-responsive table-bordered table-striped table-hover" id="tables">
                             <thead>
                                 <th scope="col">Id</th>
                                 <th scope="col">Foto</th>
@@ -28,11 +28,12 @@
                                     <tr>
                                         <td>{{ $ruang->id }}</td>
                                         <td>
-                                            <img width="200px" src="{{ asset('storage/images/' . $ruang->foto) }}"
+                                            <img width="200px" class="img-fluid"
+                                                src="{{ asset('storage/images/' . $ruang->foto) }}"
                                                 alt="{{ $ruang->foto }}">
                                             @if ($ruang->foto == null)
                                                 <img width="200px" src="{{ asset('images/default.jpg') }}"
-                                                    class="img-fluid" width="100px">
+                                                    class="img-fluid">
                                             @endif
                                         </td>
                                         <td>{{ $ruang->nama_ruang }}</td>

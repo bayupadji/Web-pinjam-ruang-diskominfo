@@ -7,7 +7,8 @@
             <div class="col-md-12">
                 <div class="card rounded-4 p-1">
                     <div class="card-body">
-                        <table class="table table-responsive table-striped table-hover" id="tables-transaksi">
+                        <table class="table table-responsive border table-striped table-bordered table-hover"
+                            id="tables-transaksi">
                             <thead>
                                 <th scope="col">No.</th>
                                 <th scope="col">id</th>
@@ -41,11 +42,17 @@
                                         @endif
                                         @if ($transaksi->status == 'Belum terverifikasi')
                                             <td>
-                                                <button type="button" class="btn btn-outline-success"
-                                                    data-bs-toggle="modal" data-bs-target="#verifikasi"
-                                                    data-bs-id="{{ $transaksi->id }}">
-                                                    Verifikasi
-                                                </button>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <button type="button" class="btn btn-outline-success"
+                                                            data-bs-toggle="modal" data-bs-target="#verifikasi"
+                                                            data-bs-id="{{ $transaksi->id }}">
+                                                            Verifikasi
+                                                        </button>
+
+                                                    </div>
+                                                </div>
+
                                             </td>
                                         @else
                                             <td>
@@ -54,7 +61,6 @@
                                                 </button>
                                             </td>
                                         @endif
-
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -88,6 +94,7 @@
         </div>
     </div>
 
+
 @endsection
 
 @push('script')
@@ -112,6 +119,8 @@
     <script>
         $(document).ready(function() {
             $('#tables-transaksi').DataTable({
+
+                responsive: true,
 
                 dom: 'Bfrtip',
                 buttons: [{

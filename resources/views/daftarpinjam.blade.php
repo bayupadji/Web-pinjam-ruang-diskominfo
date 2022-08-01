@@ -5,10 +5,11 @@
 @section('content')
     <div class="container py-5">
         <section class="py-4">
-            <h1 class="fw-bold">Daftar Peminjaman</h1>
+            <h1 class="fw-bold">Daftar Peminjaman Anda</h1>
+            <h5>{{ Auth::user()->name }}</h5>
         </section>
         <div class="table">
-            <table class="table table-striped table-bordered table-hover" id="tables-home">
+            <table class="table table-striped border table-bordered table-hover" id="tables-home">
                 <thead>
                     <tr>
                         <th>No</th>

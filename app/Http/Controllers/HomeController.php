@@ -63,7 +63,7 @@ class HomeController extends Controller
         $ruang = Ruang::all();
         if (Auth::check()) {
             $user = Auth::user();
-            $transaksi = Transaksi::where('user_id', $user->id)->get();
+            $transaksi = Transaksi::where('user_id', $user->id)->get()->sortByDesc('created_at');
             $ctransaksi = count($transaksi);
         } else {
             $transaksi = [];
